@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>British Bus Bingo</title>
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+	<style>
+		html, body {
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+		}
+
+		body {
+			background-color: #000;
+			color: #fff;
+			font-family: 'Inter', sans-serif;
+		}
+
+		#bg {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100vw;
+			height: 100vh;
+			z-index: -1;
+			background-size: 20%;
+			background-position: center;
+			background-repeat: repeat;
+			filter: blur(10px);
+		}
+
+		#game-board {
+			display: fixed;
+			height: 100vh;
+			width: 100vw;
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			grid-template-rows: repeat(3, 1fr);
+			column-gap: 1em;
+			row-gap: 1em;
+		}
+
+		#game-board > div {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			color: #fff;
+			font-size: 2em;
+			font-weight: bold;
+			text-align: center;
+
+			border: 0.5em solid;
+			border-radius: 1em;
+
+			padding: 1em;
+			margin: 1em;
+
+			cursor: default;
+			user-select: none;
+
+		}
+
+		#game-board > div span {
+			display: block;
+			font-size: 150%;
+			margin: 0;
+			padding: 0;
+		}
+		
+		/* alternating colours! */
+		#game-board > div:nth-child(even) {
+			background-color: #5113;
+			border-color: #5113;
+		}
+
+		#game-board > div:nth-child(even).selected {
+			background-color: #511;
+			border-color: #f35;
+		}
+
+		#game-board > div:nth-child(odd) {
+			background-color: #1113;
+			border-color: #1113;
+		}
+
+		#game-board > div:nth-child(odd).selected {
+			background-color: #111;
+			border-color: #555;
+		}
+
+		#intro {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100vw;
+			background-color: #fff;
+			color: #000;
+			box-shadow: 0 0 10px #000;
+			display: flex;
+			justify-content: space-evenly;
+			align-items: center;
+		}
+
+		#intro a {
+			color: #f35;
+		}
+
+		#intro a.button {
+			padding: 1em 2em;
+			background-color: #f35;
+			color: #fff;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			text-decoration: none;
+		}
+
+		#intro a:hover, #intro a:active {
+			text-decoration: none;
+		}
+
+		#intro a.button:hover, #intro a.button:active {
+			background-color: #311;
+			color: #fff;
+		}
+
+
+		@media (max-width: 1600px) or (max-height: 1000px) {
+			#game-board {
+				column-gap: 0.2em;
+				row-gap: 0.2em;
+			}
+
+			#game-board > div {
+				font-size: 1em;
+				border-width: 0.5em;
+				border-radius: 0.5em;
+				padding: 0.25em;
+				margin: 0.25em;
+			}
+		}
+
+		@media (max-width: 1100px) {
+			#intro {
+				height: 100vh;
+				width: calc(100vw - 2em);
+
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				
+				text-align: center;
+				padding: 1em;
+			}
+		}
+	</style>
+</head>
+<body>
+	<aside id="bg" role="presentation" aria-hidden="true"></aside>
+	<aside id="cover" role="presentation" aria-hidden="true"></aside>
+
+	<aside id="intro">
+
+		<h1>British Bus Bingo</h1>
+		<p>
+			By&nbsp;<a href="https://thomasr.me">Tom</a>,&nbsp;with&nbsp;💖➡️🚌. 
+			Inspiration from <a href="https://www.reddit.com/r/CasualUK/comments/10j8x6j/british_bus_bingo_card/" style="display: inline-block;">u/SquireBev</a> and the rest of the <a href="https://49ga.ng">49&nbsp;Gang</a>.
+		</p>
+
+		<p><a href="javascript:closeIntro()" class="button">Got it!</a></p>
+
+		<!-- <p>
+			Play <a href="javascript:generateBoard(3)">3x3</a> or <a href="javascript:generateBoard(5)">5x5</a>?
+		</p> -->
+	</aside>
+
+	<main id="game-board">
+	</main>
+
+	<script src="bingo.js"></script>
+</body>
+</html>
